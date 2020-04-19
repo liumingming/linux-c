@@ -21,12 +21,19 @@ void heap_init(Heap *heap, int(*compare)(const void *key1, const void *key2), vo
 
 void head_destroy(Heap *heap)
 {
-    
+    if (heap->destroy != NULL) {
+        for (int i = 0; i < heap_size(heap); i++) {
+            heap->destroy(heap->tree[i]);
+        }
+    }
+    free(heap->tree);
+    memset(heap, 0, sizeof(heap));
+    return;
 }
 
 int heap_insert(Heap *heap, void **data)
 {
-
+    
 }
 
 int heap_extract(Heap *heap, void **data)
