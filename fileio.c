@@ -2,8 +2,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
-#include <string.h>
 
 char buf[] = "abcdefg";
 char buf2[8];
@@ -11,7 +9,7 @@ char buf2[8];
 int main(void)
 {
     int fd;
-    fd = open("file.txt", O_RDWR | O_APPEND);
+    fd = open("file.txt", O_RDWR | O_APPEND | O_CREAT);
     if (fd < 0) {
         printf("open filed\n");
         exit(-1);
@@ -28,6 +26,8 @@ int main(void)
     }
 
     printf("read successful, %s\n", buf2);
+
+    close(fd);
 
     return 0;
 }
